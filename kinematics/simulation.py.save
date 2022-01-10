@@ -1,0 +1,80 @@
+import matplotlib.pyplot as plt
+import mpl_toolkits.mplot3d.axes3d as p3
+import mpl_toolkits.mplot3d.art3d as art3d
+from matplotlib.animation import FuncAnimation
+from matplotlib.patches import RegularPolygon
+from kinematics import Kinematics
+import numpy as np
+import math
+
+x_data = []
+y_data = []
+z_data = []
+
+fig = plt.figure()
+plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.1)
+ax = plt.axes(projection='3d')
+line, = ax.plot3D(np.zeros(16),np.zeros(16),np.zeros(16), 'black')
+
+#Setting the axes properties
+ax.set_xlim3d([-150.0, 150.0])
+ax.set_xlabel('X')
+
+ax.set_ylim3d([-200.0, 200.0])
+ax.set_ylabel('Y')
+
+ax.set_zlim3d([0.0, 500.0])
+ax.set_zlabel('Z')
+
+k = Kinematics()
+
+# draw basplate and top plate
+thetas = np.linspace(0, 360, 7)
+radius_b = 150
+radius_p = 75
+
+xb=[]
+yb=[]
+xp=[]
+yp=[]
+for theta in thetas:
+	xb.append(radius_b*math.cos(math.radians(theta)))
+	yb.append(radius_b*math.sin(math.radians(theta)))
+	xp.append(radius_p*math.cos(math.radians(theta)))
+	yp.append(radius_p*math.sin(math.radians(theta)))
+
+ax.plot3D(xb,yb,np.zeros(len(xb)), 'blue')
+ax.plot3D(xp, yp, [100]*len(xp), 'red')
+
+# draw servo points
+base_angles = k.base_angles
+radius=75
+x =[]
+y=[]
+for angle in base_angles:
+        x.append(radius_b*math.cos(math.radians(angle)))
+        y.append(radius_b*math.sin(math.radians(angle)))
+
+ax.plot3D(x,y,np.zeros(len(x)), 'o')
+
+# draw link lengths:
+xl=[]
+yl=[]
+zl=[]
+k._compute_link_length([0,0,75,0,0,0])
+for link in k.link_length:
+	xl.append(link[0][0])
+	yl.append(link[1][0])
+	zl.append(link[2][0])
+
+ax.plot(xl,yl,zl, '*')
+
+#draw servo arm
+xs = []
+ys = []
+zs = []
+for arm in range(len(6)):
+	xs.append(radius_b*math.cos(math.radians(angle))
+
+plt.show()
+

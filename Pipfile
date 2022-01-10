@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+opencv-python = "*"
+"rpi.gpio" = "*"
+smbus = "*"
+picamera = "*"
+matplotlib = "*"
+imutils = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"

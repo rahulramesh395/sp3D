@@ -1,0 +1,19 @@
+from servo_hat_library import PCA9685
+import time
+
+pwm = PCA9685(0x40, True)
+pwm.setPWMFreq(50)
+
+class ServoControl:
+
+	def _init_(self):
+	#set GPIO pins
+
+	def set_angle(self, servo_id, angle):
+	pwm = PCA9685(0x40, True)
+pwm.setPWMFreq(50)#set angle as input to a servo id
+
+	def _actuate_servo(self):
+	# send commad to actuate servo 
+
+
