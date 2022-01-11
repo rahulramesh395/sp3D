@@ -3,7 +3,6 @@ import mpl_toolkits.mplot3d.axes3d as p3
 import mpl_toolkits.mplot3d.art3d as art3d
 from matplotlib.animation import FuncAnimation
 from matplotlib.patches import RegularPolygon
-from kinematics.kinematics import Kinematics
 from matplotlib.widgets import Slider, Button
 import numpy as np
 import math
@@ -11,7 +10,12 @@ import math
 
 class Simulation():
 
-	def __init__(self):
+	def __init__(self, Kinematics):
+
+		#Intialise Kinematics object
+		self.kinematics = Kinematics
+
+		#Initialise figure and figure properties
 		self.fig = plt.figure()
 		self.ax = plt.axes(projection='3d')
 		plt.subplots_adjust(left=0.1, right=0.9, top=1.00, bottom=0.360)
@@ -33,8 +37,6 @@ class Simulation():
 		self.ax.set_zlim3d([0.0, 60.0])
 		self.ax.set_zlabel('Z')
 
-		self.kinematics = Kinematics()
-
 		#Slider properties
 		px_slider = plt.axes([0.25,0.30,0.50,0.02])
 		py_slider = plt.axes([0.25,0.25,0.50,0.02])
@@ -50,6 +52,9 @@ class Simulation():
 		self.slide_alpha = Slider(alpha_slider, 'alpha', -1, 1, valinit=0)
 		self.slide_beta  = Slider(beta_slider, 'beta', -1, 1, valinit=0)
 		self.slide_gamma = Slider(gamma_slider, 'gamma', -1, 1, valinit=0)
+
+		#intialise transition
+		self.transition = [self.slide_px.val, self.slide_py.val,self.slide_pz.val, self.slide_alpha.val, self.slide_beta.val, self.slide_gamma.val]
 
 		#reset button
 		resetax = plt.axes([0.85, 0.025, 0.1, 0.04])
