@@ -43,6 +43,7 @@ class Kinematics:
 				M = 2 * self.servo_arm_length * (self.cord_q[i][2] - self.base_joint[i][2])
 				N = 2 * self.servo_arm_length * (math.cos(self.beta[i])*(self.cord_q[i][0] - self.base_joint[i][0]) + math.sin(self.beta[i])*(self.cord_q[i][1] - self.base_joint[i][1]))
 				self.alpha[i] = math.asin(L/math.sqrt(M**2 + N**2)) - math.atan(N/M)
+
 		except:
 			print("Limit Reached")
 
