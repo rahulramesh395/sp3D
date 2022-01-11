@@ -1,14 +1,14 @@
 # sp3D
 ---------
 
-# Required HW
+## Required HW
 --------------
 1. RaspberryPi 3b+ 
 2. ServoHat
 3. Servo Motors - MG996R
 4. PiCam
 
-# Installation 
+## Installation 
 --------------
 1. git clone ""
 2. `cd sp3D`
