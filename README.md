@@ -15,7 +15,7 @@
 2. python 3.7 (or above)
 3. pipenv
 
-On a raspberry pi with the rasbian OS,
+##### On a raspberry pi with the rasbian OS,
 
 1. `sudo update`
 2. `sudo upgrade` 
@@ -31,20 +31,21 @@ On a raspberry pi with the rasbian OS,
 3. `python main.py`
 
 Enjoy!!
--
+
 
 ## File Structure
+```
 /sp3D
-|_ main.py
-|_README.md
-|_kinematics
-	|_kinematics.py
-	|_simulation.py
-|_servo_control
-	|_servo_hat_library.py
-	|_servo_control.py
-|_vision
-	|_vision.py
+	|_ main.py
+	|_ README.md
+	|_ kinematics
+		|_ kinematics.py 
+		|_ simulation.py
+	|_ servo_control
+		|_ servo_hat_library.py
+		|_ servo_control.py
+	|_ vision  (Under Contruction !!!)
+		|_ vision.py (Under Construction !!)
 
-
+```
 
