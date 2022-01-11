@@ -3,32 +3,31 @@ from kinematics.kinematics import Kinematics
 from kinematics.simulation import Simulation as KineSimulation
 import math
 import threading
+import time
+
+def actuate_servos(Servo, servo_angles):
+	id = [0,4,12,9,10,15]
+	for i, angle in enumerate(servo_angles):
+		Servo.actuate_servo(id[i], abs(angle))
+
+def get_servo_angles_and_actuate(Kinematics, Servo):
+
+	while True:
+		time.sleep(1)
+		actuate_servos(Servo, Kinematics.get_alpha("deg"))
 
 def main():
 
-	# init objects
-	K = Kinematics()
-	S = ServoControl()
-	Sim = KineSimulation()
+	#initialise object instances
+	kine = Kinematics()
+	servo = ServoControl()
 
+	# start thread to get servo angles
+	threading.Thread(target=get_servo_angles_and_actuate, args=(kine,servo,)).start()
+
+	Sim = KineSimulation(kine)
 	Sim.start_simulation()
-	while True:
-		transition = Sim.get_transition()
-		print(transition)
-		print(K.get_alpha())
 
-	#for i in range(6):
-	#	t = input('Enter transition ')
-	#	transition.append(int(t))
-
-	#K.apply_transition(transition)
-
-	#servo_angles = K.get_alpha()
-	#id = [0,4,12,9,10,15]
-
-	#for i, angle in enumerate(servo_angles):
-	#	print(angle)
-	#	S.actuate_servo(id[i], abs(angle))
 
 if __name__=="__main__":
 	main()
