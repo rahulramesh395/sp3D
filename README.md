@@ -49,3 +49,17 @@ Enjoy!!
 
 ```
 
+## Progject Description
+- The final aim of the project is to drive a 6DOF strewart platform using an unthethered object. Simply put, A camera is mounted on the moving platform of the stewart platform 
+which tracks an object. The platform, and hence the camera moves along with the object thereby keeping the object in frame.
+
+- Please have a look at the following link to familiarise yourselves with <https://www.youtube.com/watch?v=jVgYo1qos7w>
+
+### Progress: 
+ 
+- The code enables the user to visualise the platform movement using an interactive graphical interface. The user can manipulate the configuration of the moveable platform.
+- The servos react to the input provided by the user. 
+- Camera related softwware is still under constrction.
+
+## References
+- <https://www.instructables.com/Stewart-Platform/>
