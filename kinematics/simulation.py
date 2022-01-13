@@ -46,12 +46,12 @@ class Simulation():
 		gamma_slider = plt.axes([0.25,0.05,0.50,0.02])
 
 		#initialise slider
-		self.slide_px = Slider(px_slider, 'px', 0, 10, valinit=0)
-		self.slide_py = Slider(py_slider, 'py', 0, 10, valinit=0)
-		self.slide_pz = Slider(pz_slider, 'pz', 0, 50, valinit=50)
-		self.slide_alpha = Slider(alpha_slider, 'alpha', -1, 1, valinit=0)
-		self.slide_beta  = Slider(beta_slider, 'beta', -1, 1, valinit=0)
-		self.slide_gamma = Slider(gamma_slider, 'gamma', -1, 1, valinit=0)
+		self.slide_px = Slider(px_slider, 'px', 0, 20, valinit=0)
+		self.slide_py = Slider(py_slider, 'py', 0, 20, valinit=0)
+		self.slide_pz = Slider(pz_slider, 'pz', 0, 45, valinit=45)
+		self.slide_alpha = Slider(alpha_slider, 'alpha', -1.57, 1.57, valinit=0)
+		self.slide_beta  = Slider(beta_slider, 'beta', -1.57, 1.57, valinit=0)
+		self.slide_gamma = Slider(gamma_slider, 'gamma', -1.57, 1.57, valinit=0)
 
 		#intialise transition
 		self.transition = [self.slide_px.val, self.slide_py.val,self.slide_pz.val, self.slide_alpha.val, self.slide_beta.val, self.slide_gamma.val]
@@ -125,7 +125,7 @@ class Simulation():
 		beta = self.kinematics.beta
 
 		for arm in range(6):
-			if arm%2 == 0:
+			if arm%2 == 1:
 				xs.append(a*math.cos(alpha[arm])*math.cos(beta[arm]) + x[arm])
 				ys.append(a*math.cos(alpha[arm])*math.sin(beta[arm]) + y[arm])
 				zs.append(a*math.sin(alpha[arm]) + z[arm])
