@@ -6,7 +6,7 @@ import threading
 import time
 
 def actuate_servos(Servo, servo_angles):
-	id = [0,4,12,9,10,15]
+	id = [0,4,7,10,12,15]
 	for i, angle in enumerate(servo_angles):
 		Servo.actuate_servo(id[i], abs(angle))
 
@@ -22,7 +22,7 @@ def main():
 	kine = Kinematics()
 	servo = ServoControl()
 
-	# start thread to get servo angles
+	# start thread to get servo angles and actuate servos
 	threading.Thread(target=get_servo_angles_and_actuate, args=(kine,servo,)).start()
 
 	Sim = KineSimulation(kine)
