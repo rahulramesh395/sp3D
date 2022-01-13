@@ -125,13 +125,13 @@ class Simulation():
 		beta = self.kinematics.beta
 
 		for arm in range(6):
-			if arm%2 == 1:
+			if arm%2 == 0:
 				xs.append(a*math.cos(alpha[arm])*math.cos(beta[arm]) + x[arm])
 				ys.append(a*math.cos(alpha[arm])*math.sin(beta[arm]) + y[arm])
 				zs.append(a*math.sin(alpha[arm]) + z[arm])
 			else:
-				xs.append(a*math.cos(math.pi - alpha[arm])*math.cos(math.pi + beta[arm]) + x[arm])
-				ys.append(a*math.cos(math.pi - alpha[arm])*math.sin(math.pi + beta[arm]) + y[arm])
+				xs.append(a*math.cos(math.pi - alpha[arm])*math.cos(beta[arm]) + x[arm])
+				ys.append(a*math.cos(math.pi - alpha[arm])*math.sin(beta[arm]) + y[arm])
 				zs.append(a*math.sin(math.pi - alpha[arm]) + z[arm])
 
 
