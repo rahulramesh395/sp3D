@@ -8,7 +8,7 @@ class Kinematics:
 
 		# class variables
 		self.alpha = [0]*6
-		self.servo_arm_length = 15
+		self.servo_arm_length = 20
 		self.leg_length = 100
 		self.base_radius = 150
 		self.platform_radius = 75
