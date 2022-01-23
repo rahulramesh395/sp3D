@@ -10,13 +10,14 @@ class Vision:
 		self.mask = None
 		self.frame = None
 		self.show = True
+		self.center_pos = []
 
 		atexit.register(self._clean_up)
 
 	def _clean_up(self):
 		print('Exiting vision ...')
 		self.capture.release()
-		cv.destroAllWIndows()
+		cv2.destroyAllWindows()
 
 	def _start_cam(self):
 		# start camera
@@ -26,7 +27,7 @@ class Vision:
 		self.frame = self._read_frame()
 
 		# Converting the image to hsv
-		frame = imutils.resize(self.frame, width=600)
+		frame = imutils.resize(self.frame, width=1000)
 		frame = imutils.rotate(self.frame, angle=180)
 		hsv = cv2.cvtColor(self.frame, cv2.COLOR_BGR2HSV)
 
@@ -70,18 +71,17 @@ class Vision:
 				cv2.circle(self.frame, (int(x), int(y)), int(radius),(0, 255, 255), 2)
 				cv2.circle(self.frame, center, 5, (0, 0, 255), -1)
 
+		self.center_pos.append(center)
+
 	def _detect_object(self):
-		try:
-			self._start_cam()
-			while self.show:
-				self._detect_red_color()
-				self._draw_contour()
-				self._show_frame()
-
-		except Exception:
-			self._clean_up()
-
-	def get_position(self):
-		return xyz 
+		#start cam
+		self._start_cam()
+		while self.show:
+			#detect object
+			self._detect_red_color()
+			#draw contour around detected object
+			self._draw_contour()
+			#show the result
+			self._show_frame()
 
 
