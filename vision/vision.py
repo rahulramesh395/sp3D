@@ -10,8 +10,7 @@ class Vision:
 		self.mask = None
 		self.frame = None
 		self.show = True
-		self.center_pos = []
-
+		self.parameters = {"radius": None, "center": [None, None], "recording_points": False}
 		atexit.register(self._clean_up)
 
 	def _clean_up(self):
@@ -55,8 +54,10 @@ class Vision:
 	def _draw_contour(self):
 		cnts = cv2.findContours(self.mask.copy(),cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
 		center = None
+		radius = None
 		# only proceed if at least one contour was found
 		if len(cnts)>0:
+			recording_points = True
 			# find the largest contour in the mask, then use
 			# it to compute the minimum enclosing circle and
 			# centroid
@@ -70,8 +71,10 @@ class Vision:
 				# then update the list of tracked points
 				cv2.circle(self.frame, (int(x), int(y)), int(radius),(0, 255, 255), 2)
 				cv2.circle(self.frame, center, 5, (0, 0, 255), -1)
+		else:
+			recording_points = False
 
-		self.center_pos.append(center)
+		self.parameters = {"radius": radius, "center": center, "recording_points": recording_points}
 
 	def _detect_object(self):
 		#start cam
@@ -84,4 +87,5 @@ class Vision:
 			#show the result
 			self._show_frame()
 
-
+	def get_parameters(self, par):
+		return self.parameters[par]
