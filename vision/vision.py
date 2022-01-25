@@ -27,7 +27,7 @@ class Vision:
 
 		# Converting the image to hsv
 		frame = imutils.resize(self.frame, width=1000)
-		frame = imutils.rotate(self.frame, angle=180)
+		#frame = imutils.rotate(self.frame, angle=180)
 		hsv = cv2.cvtColor(self.frame, cv2.COLOR_BGR2HSV)
 
 		# define range of red color in masks
@@ -50,6 +50,11 @@ class Vision:
 		cv2.imshow("Mask", self.mask)
 		if cv2.waitKey(1) == 27:
 			self.show = False
+
+	def _draw_center(self):
+		center_points = (320,240)
+		cv2.circle(self.frame, center_points, 100,(0, 255, 0), 2)
+		cv2.circle(self.frame, center_points, 2,(0,255,0), -1)
 
 	def _draw_contour(self):
 		cnts = cv2.findContours(self.mask.copy(),cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
@@ -85,6 +90,7 @@ class Vision:
 			#draw contour around detected object
 			self._draw_contour()
 			#show the result
+			self._draw_center()
 			self._show_frame()
 
 	def get_parameters(self, par):
