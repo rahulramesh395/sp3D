@@ -46,9 +46,9 @@ class Simulation():
 		gamma_slider = plt.axes([0.25,0.05,0.50,0.02])
 
 		#initialise slider
-		self.slide_px = Slider(px_slider, 'px', 0, 20, valinit=0)
-		self.slide_py = Slider(py_slider, 'py', 0, 20, valinit=0)
-		self.slide_pz = Slider(pz_slider, 'pz', 0, 45, valinit=45)
+		self.slide_px = Slider(px_slider, 'px', -5, 5, valinit=0)
+		self.slide_py = Slider(py_slider, 'py', -5, 5, valinit=0)
+		self.slide_pz = Slider(pz_slider, 'pz', 30, 45, valinit=40)
 		self.slide_alpha = Slider(alpha_slider, 'alpha', -1.57, 1.57, valinit=0)
 		self.slide_beta  = Slider(beta_slider, 'beta', -1.57, 1.57, valinit=0)
 		self.slide_gamma = Slider(gamma_slider, 'gamma', -1.57, 1.57, valinit=0)

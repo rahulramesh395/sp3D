@@ -54,6 +54,7 @@ class ComputePose:
 		print(self.init_y)
 		print(self.init_z)
 
+
 	def _get_center(self):
 		center = self.vision.get_parameters("center")
 		return center
