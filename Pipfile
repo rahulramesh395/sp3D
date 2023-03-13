@@ -4,12 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-opencv-python = "*"
-"rpi.gpio" = "*"
 smbus = "*"
-picamera = "*"
-matplotlib = "*"
-imutils = "*"
+numpy = ">1.0,<1.15"
+flask = "*"
+flask-cors = "*"
+"rpi.gpio" = "*"
 
 [dev-packages]
 

@@ -3,7 +3,7 @@ import time
 
 pwm = PCA9685(0x40, True)
 pwm.setPWMFreq(50)
-ids = [0, 4, 12]
+ids = [0, 4, 7, 10, 12, 15]
 #while True:
 #	# setServoPulse(2,2500)
 #	for j in ids:
@@ -19,8 +19,12 @@ ids = [0, 4, 12]
 while True:
 	time.sleep(2)
 	print("Reseting servo position")
-	for id in ids:
-        	pwm.setServoPulse(id, 500)
+	for i, id in enumerate(ids):
+		if i%2 == 1:
+			pwm.setServoPulse(id, 2500)
+		else:
+			pwm.setServoPulse(id, 500)
+            
 
 	time.sleep(1.5)
 	# Input
@@ -28,12 +32,20 @@ while True:
 	servo1 = input("Servo 1: ")
 	servo2 = input("Servo 2: ")
 	servo3 = input("Servo 3: ")
-
-	servo_angle = [servo1, servo2, servo3] 
+	servo4 = input("Servo 4: ")
+	servo5 = input("Servo 5: ")
+	servo6 = input("Servo 6: ")
+	
+	servo_angle = [servo1, servo2, servo3, servo4, servo5, servo6]
+# 	servo_angle = [servo1]
+	
 
 	# Actuation
 	print("Actuating servos ...")
 	for i, servo_id in enumerate(ids):
-		pulse = 500 + (2000/180)*int(servo_angle[i])
-		pwm.setServoPulse(servo_id, pulse)
+		pulse = (2000/180)*int(servo_angle[i])
+		if i%2 == 1:
+			pwm.setServoPulse(servo_id, 2500 - pulse)
+		else:
+			pwm.setServoPulse(servo_id, 500 + pulse)            
 

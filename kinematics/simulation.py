@@ -26,7 +26,7 @@ class Simulation():
 			self.line.append(line)
 
 		self.moving_platform,  = self.ax.plot3D([],[],[], 'red')
- 
+
 		#Setting the axes properties
 		self.ax.set_xlim3d([-250.0, 250.0])
 		self.ax.set_xlabel('X')
@@ -46,8 +46,8 @@ class Simulation():
 		gamma_slider = plt.axes([0.25,0.05,0.50,0.02])
 
 		#initialise slider
-		self.slide_px = Slider(px_slider, 'px', -5, 5, valinit=0)
-		self.slide_py = Slider(py_slider, 'py', -5, 5, valinit=0)
+		self.slide_px = Slider(px_slider, 'px', -10, 10, valinit=0)
+		self.slide_py = Slider(py_slider, 'py', -10, 10, valinit=0)
 		self.slide_pz = Slider(pz_slider, 'pz', 30, 45, valinit=40)
 		self.slide_alpha = Slider(alpha_slider, 'alpha', -1.57, 1.57, valinit=0)
 		self.slide_beta  = Slider(beta_slider, 'beta', -1.57, 1.57, valinit=0)
@@ -68,8 +68,8 @@ class Simulation():
 
 		# draw basplate and topplate
 		thetas = np.linspace(0, 360, 7)
-		radius_b = 180
-		radius_p = 75
+		radius_b = self.kinematics.base_radius
+		radius_p = self.kinematics.platform_radius
 
 		xb=[]
 		yb=[]
@@ -88,7 +88,7 @@ class Simulation():
 
 		# draw servo points
 		base_angles = self.kinematics.base_angles
-		radius_s=150
+		radius_s=self.kinematics.base_radius
 		x =[]
 		y=[]
 		z = np.zeros(6)
@@ -125,14 +125,14 @@ class Simulation():
 		beta = self.kinematics.beta
 
 		for arm in range(6):
-			if arm%2 == 0:
+			if arm%2 == 1:
 				xs.append(a*math.cos(alpha[arm])*math.cos(beta[arm]) + x[arm])
 				ys.append(a*math.cos(alpha[arm])*math.sin(beta[arm]) + y[arm])
 				zs.append(a*math.sin(alpha[arm]) + z[arm])
 			else:
-				xs.append(a*math.cos(math.pi - alpha[arm])*math.cos(beta[arm]) + x[arm])
-				ys.append(a*math.cos(math.pi - alpha[arm])*math.sin(beta[arm]) + y[arm])
-				zs.append(a*math.sin(math.pi - alpha[arm]) + z[arm])
+				xs.append(a*(-math.cos(alpha[arm]))*(-math.cos(beta[arm])) + x[arm])
+				ys.append(a*(-math.cos(alpha[arm]))*(-math.sin(beta[arm])) + y[arm])
+				zs.append(a*math.sin(alpha[arm]) + z[arm])
 
 
 		#draw connections

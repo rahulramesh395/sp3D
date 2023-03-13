@@ -11,7 +11,7 @@ class Kinematics:
 		self.servo_arm_length = 45
 		self.leg_length = 100
 		self.base_radius = 150
-		self.platform_radius = 75
+		self.platform_radius = 100
 		self.base_joint = [None] * 6
 		self.platform_joint = [None] * 6 
 		self.link_length = [None] * 6
@@ -20,6 +20,12 @@ class Kinematics:
 		self.beta = [0,2*PI/3, 2*PI/3,-2*PI/3, -2*PI/3, 0]
 		self.platform_angles = [317, 347, 77, 107.1, 193.9, 227.8]
 		self.base_angles = [287, 12.9, 47.1, 132.9, 167.1, 252.9]
+		self.x_trans = 0
+		self.y_trans = 0
+		self.z_trans = 30
+		self.x_rot = 0
+		self.y_rot = 0
+		self.z_rot = 0
 
 		# compute joint parameters
 		for i in range(6):
@@ -34,6 +40,7 @@ class Kinematics:
 			zp = 0
 			self.platform_joint[i] = np.array([[xp], [yp], [zp]])
 
+		self.apply_transition()
 
 
 	def _compute_alpha(self):
@@ -44,7 +51,9 @@ class Kinematics:
 				N = 2 * self.servo_arm_length * (math.cos(self.beta[i])*(self.cord_q[i][0] - self.base_joint[i][0]) + math.sin(self.beta[i])*(self.cord_q[i][1] - self.base_joint[i][1]))
 				self.alpha[i] = math.asin(L/math.sqrt(M**2 + N**2)) - math.atan(N/M)
 
-		except:
+
+		except Exception as e:
+			print(e)
 			print("Limit Reached")
 
 	def _compute_link_length(self, transition):
@@ -81,7 +90,8 @@ class Kinematics:
 		return self.alpha
 
 
-	def apply_transition(self, transition):
+	def apply_transition(self):
+		transition = [self.x_trans, self.y_trans, self.z_trans, self.x_rot, self.y_rot, self.z_rot]
 		self._compute_link_length(transition)
 		self._compute_alpha()
 
